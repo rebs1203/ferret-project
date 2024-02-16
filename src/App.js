@@ -28,7 +28,7 @@ function App() {
           <Route path='/recipe-blog/register' element={
             <>
               <Nav grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
-              <Register />
+              <Register setGrantAccess={setGrantAccess}/>
             </>
           }>
           </Route>

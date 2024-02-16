@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { TextField, Button } from "@mui/material"
 
-const Register = () => {
+const Register = ({setGrantAccess}) => {
     
     const [createdUser, setCreatedUser] = useState(false)
     const [username, setUserName] = useState('')
@@ -40,12 +40,13 @@ const Register = () => {
             const response = await fetch(url, options)
 
             const data = await response.json()
-                console.log(data)
+                
+            localStorage.setItem('token', data.token)
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`)
             }
-
+            setGrantAccess(true)
             setCreatedUser(true)
         } catch (error) {
             console.log(error)
