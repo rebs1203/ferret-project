@@ -3,11 +3,11 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import '../styles/Login.css'
 
-const Login = ({grantAccess, setGrantAccess}) => {
+const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [token] = useState(localStorage.getItem('token'))
+    const [token, setToken] = useState(localStorage.getItem('token'))
 
     const navigate = useNavigate()
 
@@ -42,11 +42,11 @@ const Login = ({grantAccess, setGrantAccess}) => {
             const data = await response.json()
 
             console.log(data.message)
-            localStorage.setItem('token', data.token)
-
-
+            
+            
             if (response.ok) {
-                setGrantAccess(1)
+                localStorage.setItem('token', data.token)
+                setToken(data.token)
             } else {
                 alert(data.message)
                 throw new Error(`Error: ${response.status}`)
@@ -62,7 +62,7 @@ const Login = ({grantAccess, setGrantAccess}) => {
     return (
         <> 
             {
-                grantAccess ?
+                localStorage.getItem('token') ?
 
                 navigate('/recipe-blog/mypage')
 

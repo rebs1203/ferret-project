@@ -2,7 +2,7 @@ import { useState } from "react"
 import { TextField, Button } from "@mui/material"
 import { Link } from "react-router-dom"
 
-const Register = ({setGrantAccess}) => {
+const Register = () => {
     
     const [createdUser, setCreatedUser] = useState(false)
     const [username, setUserName] = useState('')
@@ -47,7 +47,6 @@ const Register = ({setGrantAccess}) => {
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`)
             }
-            setGrantAccess(1)
             setCreatedUser(true)
         } catch (error) {
             console.log(error)

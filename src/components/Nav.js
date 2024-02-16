@@ -7,9 +7,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
-const Nav = ({grantAccess, setGrantAccess}) => {
-
-    const [token] = useState(localStorage.getItem('token'))
+const Nav = () => {
 
     const navigate = useNavigate()
 
@@ -18,33 +16,34 @@ const Nav = ({grantAccess, setGrantAccess}) => {
     }
 
     const handleLogoff = () => {
-        fetchLogoff()
+        // fetchLogoff()
+        localStorage.clear()
         navigate('/recipe-blog/logon')
     }
 
-    const fetchLogoff = async () => {
-        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/logoff`
+    // const fetchLogoff = async () => {
+    //     const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/logoff`
 
-        const options = {
-            method: 'POST',
-            headers: {
-                Authorization:`Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        }
+    //     const options = {
+    //         method: 'POST',
+    //         headers: {
+    //             Authorization:`Bearer ${token}`,
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }
 
-        try {
-            const response = await fetch(url, options)
+    //     try {
+    //         const response = await fetch(url, options)
 
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`)
-            }
+    //         if (!response.ok) {
+    //             throw new Error(`Error: ${response.status}`)
+    //         }
 
-            setGrantAccess(0)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    //         setGrantAccess(0)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
     
 
     return (
@@ -53,9 +52,9 @@ const Nav = ({grantAccess, setGrantAccess}) => {
                 <AppBar position="static" style={{backgroundColor: '#c1121f'}}>
                     <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{fontWeight: 700, color: '#fdf0d5'}}>
-                        {!grantAccess ? "Welcome to our community recipe blog!" : "Welcome back!"}
+                        {!localStorage.getItem('token') ? "Welcome to our community recipe blog!" : "Welcome back!"}
                     </Typography>
-                        <Button color="inherit" style={{fontWeight: 700, color: '#fdf0d5'}} onClick={!grantAccess ? handleClick : handleLogoff}>{!grantAccess ? "Login" : "Logoff"}</Button>
+                        <Button color="inherit" style={{fontWeight: 700, color: '#fdf0d5'}} onClick={!localStorage.getItem('token') ? handleClick : handleLogoff}>{!localStorage.getItem('token') ? "Login" : "Logoff"}</Button>
                         </Toolbar>
                     </AppBar>
                 </Box>      

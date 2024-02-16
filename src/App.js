@@ -20,28 +20,28 @@ function App() {
         <Routes>
           <Route path='/' element={
             <>
-              <Nav grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
+              <Nav />
               <RecipesPage />
             </>
           }>
           </Route>
           <Route path='/recipe-blog/register' element={
             <>
-              <Nav grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
-              <Register setGrantAccess={setGrantAccess}/>
+              <Nav />
+              <Register />
             </>
           }>
           </Route>
           <Route path='/recipe-blog/logon' element={
             <>
-              <Nav grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
-              <Login grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
+              <Nav />
+              <Login />
             </>
           }>
           </Route>
           <Route path='/recipe-blog/mypage' element={
             <>
-              <Nav grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
+              <Nav />
               <RecipesForm reloadList={reloadList} setReloadList={setReloadList} />
               <UsersPage reloadList={reloadList} setReloadList={setReloadList} />
             </>
