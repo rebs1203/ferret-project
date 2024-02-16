@@ -18,7 +18,7 @@ const RecipesPage = () => {
 
     useEffect(() => {
         fetchAllRecipes()
-    }, [])
+    }, [cuisine])
 
     const handleChange = (event) => {
         setCuisine(event.target.value);
