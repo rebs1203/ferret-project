@@ -1,0 +1,13 @@
+.login-div {
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    color: #003049;
+    text-align: center;
+}
+
+.button {
+    color: #fdf0d5;
+}

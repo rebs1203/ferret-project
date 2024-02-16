@@ -1,24 +1,61 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import Register from './components/Register.js';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './components/Login.js';
+import UsersPage from './components/UsersPage.js';
+import RecipesForm from './components/RecipesForm.js';
+import IndividualRecipe from './components/IndividualRecipe.js';
+import RecipesPage from './components/RecipesPage.js';
+import Nav from './components/Nav.js';
 
 function App() {
+
+  const [reloadList, setReloadList] = useState(0) 
+  const [grantAccess, setGrantAccess] = useState(0)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/recipe-blog/' element={
+            <>
+              <Nav grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
+              <RecipesPage />
+            </>
+          }>
+          </Route>
+          <Route path='/recipe-blog/register' element={
+            <>
+              <Nav grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
+              <Register />
+            </>
+          }>
+          </Route>
+          <Route path='/recipe-blog/logon' element={
+            <>
+              <Nav grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
+              <Login grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
+            </>
+          }>
+          </Route>
+          <Route path='/recipe-blog/mypage' element={
+            <>
+              <Nav grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
+              <RecipesForm reloadList={reloadList} setReloadList={setReloadList} />
+              <UsersPage reloadList={reloadList} setReloadList={setReloadList} />
+            </>
+          }>
+          </Route>
+          <Route path='/recipe-blog/mypage/:id' element={
+            <>
+              <IndividualRecipe />
+            </>
+          }>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

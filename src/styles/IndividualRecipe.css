@@ -1,0 +1,29 @@
+.edit-form{
+    display: flex;
+    flex-direction: column !important;
+}
+
+.title {
+    display: flex;
+}
+
+#button {
+    height: 50%;
+    margin: 1.5%
+}
+
+.button-div {
+    display: flex;
+}
+
+.recipe-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    margin-left: 23%;
+    padding: 2%;
+    width: 50%;
+    background-color: #669bbc;
+    color: #003049;
+}

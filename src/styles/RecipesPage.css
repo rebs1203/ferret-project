@@ -1,0 +1,19 @@
+.card {
+    background-color: #669bbc;
+    color: #003049;
+}
+
+.cards-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.box {
+    margin: 0.7%;
+}
+
+.filter {
+    margin-top: 5%;
+}
