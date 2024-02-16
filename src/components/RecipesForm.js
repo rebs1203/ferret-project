@@ -36,7 +36,7 @@ const RecipesForm = ({reloadList, setReloadList}) => {
 
         const token = localStorage.getItem('token')
 
-        const url = `http://localhost:3001/recipe-blog/mypage`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage`
 
         const options = {
             method: 'POST',

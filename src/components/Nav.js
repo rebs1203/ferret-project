@@ -23,7 +23,7 @@ const Nav = ({grantAccess, setGrantAccess}) => {
     }
 
     const fetchLogoff = async () => {
-        const url = `http://localhost:3001/recipe-blog/logoff`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/logoff`
 
         const options = {
             method: 'POST',

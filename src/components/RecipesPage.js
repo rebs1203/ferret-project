@@ -27,8 +27,8 @@ const RecipesPage = () => {
     const fetchAllRecipes = async () => {
 
         const queryParams = new URLSearchParams(cuisine);
-        const url = `http://localhost:3001/recipe-blog?${queryParams?.toString()}`
-        const urlAll = `http://localhost:3001/recipe-blog`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog?${queryParams?.toString()}`
+        const urlAll = `https://recipe-blog-l7ey.onrender.com/recipe-blog`
 
         const options = {
             method: 'POST',

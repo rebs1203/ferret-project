@@ -46,7 +46,7 @@ const IndividualRecipe = () => {
 
     const fetchRecipe = async (id) => {
 
-        const url = `http://localhost:3001/recipe-blog/mypage/${id}`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
 
         const options = {
             method: 'GET',
@@ -68,7 +68,7 @@ const IndividualRecipe = () => {
 
     const fetchEdit = async (id, recipe) => {
 
-        const url = `http://localhost:3001/recipe-blog/mypage/${id}`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
 
         const options = {
             method: 'PATCH',
@@ -97,7 +97,7 @@ const IndividualRecipe = () => {
     }
 
     const fetchDelete = async (id) => {
-        const url = `http://localhost:3001/recipe-blog/mypage/${id}`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
 
         const options = {
             method: 'DELETE',
