@@ -29,17 +29,21 @@ const UsersPage = ({reloadList}) => {
     const fetchUsersRecipes = async () => {
 
         const token = localStorage.getItem('token')
+        const user = localStorage.getItem('user')
 
         console.log(token)
 
         const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage`
 
         const options = {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 Authorization:`Bearer ${token}`,
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({
+                "user": user
+            })
         }
 
         try {
