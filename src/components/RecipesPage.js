@@ -28,7 +28,7 @@ const RecipesPage = () => {
 
         const queryParams = new URLSearchParams(cuisine);
         console.log(queryParams.toString())
-        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog?${queryParams?.toString()}`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog?name=${queryParams?.toString()}`
         const urlAll = `https://recipe-blog-l7ey.onrender.com/recipe-blog`
 
         const options = {
