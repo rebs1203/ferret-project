@@ -35,7 +35,7 @@ const RecipesPage = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({'test': 'GETALL'})
+            body: JSON.stringify(cuisine ? {} : {'test': 'GETALL'})
         }
 
         try {
