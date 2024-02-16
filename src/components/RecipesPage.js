@@ -27,7 +27,6 @@ const RecipesPage = () => {
     const fetchAllRecipes = async () => {
 
         const queryParams = new URLSearchParams(cuisine);
-        console.log(queryParams.toString())
         const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog?name=${queryParams?.toString()}`
         const urlAll = `https://recipe-blog-l7ey.onrender.com/recipe-blog`
 
@@ -42,8 +41,11 @@ const RecipesPage = () => {
         try {
             const response = await fetch(cuisine ? url : urlAll, options)
             const data = await response.json()
-
-            setRecipes(data.allRecipes)
+            if (data.filteredRecipes) {
+                setRecipes(data.filteredRecipes)
+            } else {
+                setRecipes(data.allRecipes)
+            }
         } catch (error) {
             console.log(error)
         }
