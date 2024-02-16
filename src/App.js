@@ -18,7 +18,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/recipe-blog/' element={
+          <Route path='/' element={
             <>
               <Nav grantAccess={grantAccess} setGrantAccess={setGrantAccess}/>
               <RecipesPage />
