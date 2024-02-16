@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { TextField, Button } from "@mui/material"
+import { Link } from "react-router-dom"
 
 const Register = ({setGrantAccess}) => {
     
@@ -46,7 +47,7 @@ const Register = ({setGrantAccess}) => {
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`)
             }
-            setGrantAccess(true)
+            setGrantAccess(1)
             setCreatedUser(true)
         } catch (error) {
             console.log(error)
@@ -59,7 +60,7 @@ const Register = ({setGrantAccess}) => {
             { createdUser ?
             <div>
                 <h2 style={{textAlign: 'center'}}>User successfully created!</h2>
-                <p><a href="/recipe-blog/mypage">Click here to access your page!</a></p>
+                <p><Link to="/recipe-blog/mypage">Click here to access your page!</Link></p>
             </div>
             :
             <form onSubmit={handleRegister}>
