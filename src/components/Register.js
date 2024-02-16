@@ -39,6 +39,10 @@ const Register = () => {
         try {
             const response = await fetch(url, options)
 
+            const data = await response.json(
+                console.log(data)
+            )
+
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`)
             }
