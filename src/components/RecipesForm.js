@@ -35,8 +35,9 @@ const RecipesForm = ({reloadList, setReloadList}) => {
     const fetchCreateRecipe = async (recipe) => {
 
         const token = localStorage.getItem('token')
+        const userId = localStorage.getItem('user')
 
-        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage`
+        const url = `https://recipe-blog-l7ey.onrender.com/mypage`
 
         const options = {
             method: 'POST',
@@ -46,6 +47,7 @@ const RecipesForm = ({reloadList, setReloadList}) => {
             },
             body: JSON.stringify({
                 "recipeName": recipe.recipeName,
+                "createdBy": userId,
                 "cuisineType": recipe.cuisineType,
                 "estTimeOfPrep": recipe.estTimeOfPrep,
                 "ingredients": recipe.ingredients,

@@ -43,7 +43,7 @@ const Register = () => {
             const data = await response.json()
                 
             localStorage.setItem('token', data.token)
-            localStorage.setItem('user', data.user.name)
+            localStorage.setItem('user', data.user._id)
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`)

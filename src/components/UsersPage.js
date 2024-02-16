@@ -29,7 +29,7 @@ const UsersPage = ({reloadList}) => {
     const fetchUsersRecipes = async () => {
 
         const token = localStorage.getItem('token')
-        const user = localStorage.getItem('user')
+        const id = localStorage.getItem('user')
 
         console.log(token)
 
@@ -42,7 +42,7 @@ const UsersPage = ({reloadList}) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "user": user
+                "userId": id
             })
         }
 
