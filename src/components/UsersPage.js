@@ -36,7 +36,7 @@ const UsersPage = ({reloadList}) => {
         const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage`
 
         const options = {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 Authorization:`Bearer ${token}`,
                 'Content-Type': 'application/json'
