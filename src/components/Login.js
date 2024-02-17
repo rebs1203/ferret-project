@@ -46,6 +46,7 @@ const Login = () => {
             
             if (response.ok) {
                 localStorage.setItem('token', data.token)
+                console.log(data.user._id)
                 localStorage.setItem('user', data.user._id)
                 setToken(data.token)
             } else {
