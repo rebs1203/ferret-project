@@ -135,7 +135,13 @@ const IndividualRecipe = () => {
                     value={cuisineType}
                     label="Filter by Cuisine"
                     onChange={handleChange}
-                    defaultValue={recipe.cuisineType}
+                    renderValue={(selected) => {
+                        if (selected.length === 0) {
+                          return <em>Placeholder</em>;
+                        }
+            
+                        return selected.join(', ');
+                      }}
                 >
                     <MenuItem value={'Italian'}>Italian</MenuItem>
                     <MenuItem value={'Japanese'}>Japanese</MenuItem>
