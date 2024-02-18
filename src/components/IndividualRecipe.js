@@ -126,7 +126,7 @@ const IndividualRecipe = () => {
             <form onSubmit={handlePatch}>
                 <div className="edit-form">
                 <label htmlFor="recipeName"></label>
-                <TextField id="recipeName" label="Recipe name" variant="filled" onChange={(e) => setRecipeName(e.target.value)}/>
+                <TextField id="recipeName" label="Recipe name" variant="filled" defaultValue={recipe.recipeName} onChange={(e) => setRecipeName(e.target.value)}/>
                 <FormControl fullWidth variant="filled">
                 <InputLabel id="demo-simple-select-filled-label">Filter by Cuisine</InputLabel>
                 <Select
@@ -135,6 +135,7 @@ const IndividualRecipe = () => {
                     value={cuisineType}
                     label="Filter by Cuisine"
                     onChange={handleChange}
+                    defaultValue={recipe.cuisineType}
                 >
                     <MenuItem value={'Italian'}>Italian</MenuItem>
                     <MenuItem value={'Japanese'}>Japanese</MenuItem>
@@ -145,11 +146,11 @@ const IndividualRecipe = () => {
                 </Select>
                 </FormControl>
                 <label htmlFor="estTimeOfPrep"></label>
-                <TextField id="estTimeOfPrep" label="Estimate time of prep" variant="filled" onChange={(e) => setEstTimeOfPrep(e.target.value)}/>
+                <TextField id="estTimeOfPrep" label="Estimate time of prep" variant="filled" defaultValue={recipe.estTimeOfPrep} onChange={(e) => setEstTimeOfPrep(e.target.value)}/>
                 <label htmlFor="ingredients"></label>
-                <TextField id="ingredients" label="Ingredients" variant="filled" onChange={(e) => setIngredients(e.target.value)}/>
+                <TextField id="ingredients" label="Ingredients" variant="filled" defaultValue={recipe.ingredients} onChange={(e) => setIngredients(e.target.value)}/>
                 <label htmlFor="prepInstructions"></label>
-                <TextField id="prepInstructions" label="Prep instructions" variant="filled" onChange={(e) => setPrepInstructions(e.target.value)}/>
+                <TextField id="prepInstructions" label="Prep instructions" variant="filled" defaultValue={recipe.prepInstructions} onChange={(e) => setPrepInstructions(e.target.value)}/>
                 <Button variant="contained" type="submit">Finish Editing</Button>
                 <a href="/recipe-blog/mypage" style={{marginTop: '1%'}}>Go back</a>
             </div>
