@@ -79,10 +79,10 @@ const RecipesPage = () => {
                 <Box key={item._id} sx={{minWidth: 275}} className='box'>
                     <Card variant="outlined">
                         <CardContent  className='card'>
-                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                            <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
                                 {item.cuisineType}
                             </Typography>
-                            <Typography variant="h5" component="div">
+                            <Typography variant="h5" component="div" className="recipe-name">
                                 {item.recipeName}
                             </Typography>
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">

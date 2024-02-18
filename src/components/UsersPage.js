@@ -66,17 +66,19 @@ const UsersPage = ({reloadList}) => {
                 <div key={item._id} className='card-div'>
                     <Box sx={{ minWidth: 275 }}>
                         <Card variant="outlined">
-                            <CardContent key={item._id}>
-                            <Typography variant="h5" component="div">
-                                {item.recipeName}
-                            </Typography>
-                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                {item.estTimeOfPrep}
-                            </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small" onClick={() => handleClick(item._id)}>Learn More</Button>
-                            </CardActions>
+                            <div className="card-content">
+                                <CardContent key={item._id}>
+                                <Typography variant="h5" component="div" className="name">
+                                    {item.recipeName}
+                                </Typography>
+                                <Typography sx={{ mb: 1.5 }} color="text.secondary" className="time">
+                                    {item.estTimeOfPrep}
+                                </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button size="small" onClick={() => handleClick(item._id)}>Learn More</Button>
+                                </CardActions>
+                            </div>
                         </Card>
                     </Box>
                 </div>

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { TextField, Button } from "@mui/material"
 import { Link } from "react-router-dom"
+import '../styles/Register.css'
 
 const Register = () => {
     
@@ -64,14 +65,14 @@ const Register = () => {
             </div>
             :
             <form onSubmit={handleRegister}>
-                <div style={{display: 'flex', flexDirection: 'column'}}>
+                <div className="register-form">
                 <label htmlFor="username"></label>
                 <TextField id="username" label="Username" variant="filled" onChange={(e) => setUserName(e.target.value)}/>
                 <label htmlFor="email"></label>
                 <TextField id="email" label="Email" variant="filled" onChange={(e) => setEmail(e.target.value)}/>
                 <label htmlFor="password"></label>
                 <TextField id="password" label="Password" variant="filled" onChange={(e) => setPassword(e.target.value)}/>
-                <Button variant="contained" type="submit">Create Account</Button>
+                <Button variant="contained" type="submit" id="button">Create Account</Button>
             </div>
             </form>
             }

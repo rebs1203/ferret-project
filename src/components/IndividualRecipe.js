@@ -26,21 +26,21 @@ const IndividualRecipe = () => {
     const navigate = useNavigate()
 
     const handleChange = (event) => {
-        setCuisineType(event.target.value)
+
+            setCuisineType(event.target.value)
+
     };
 
     const handlePatch = (event) => {
         event.preventDefault()
-        if (recipeName && cuisineType && estTimeOfPrep && ingredients && prepInstructions) {
-            const recipeObject = {
-                recipeName,
-                cuisineType,
-                estTimeOfPrep,
-                ingredients,
-                prepInstructions
-            }
-            fetchEdit(id, recipeObject)
+        const recipeObject = {
+            recipeName: recipeName || recipe.recipeName,
+            cuisineType: cuisineType || recipe.cuisineType,
+            estTimeOfPrep: estTimeOfPrep || recipe.estTimeOfPrep,
+            ingredients: ingredients || recipe.ingredients,
+            prepInstructions: prepInstructions || recipe.prepInstructions
         }
+        fetchEdit(id, recipeObject)
     }
 
 
@@ -66,7 +66,7 @@ const IndividualRecipe = () => {
         }
     }
 
-    const fetchEdit = async (id, recipe) => {
+    const fetchEdit = async (id, editedRecipe) => {
 
         const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
 
@@ -77,11 +77,11 @@ const IndividualRecipe = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "recipeName": recipe.recipeName,
-                "cuisineType": recipe.cuisineType,
-                "estTimeOfPrep": recipe.estTimeOfPrep,
-                "ingredients": recipe.ingredients,
-                "prepInstructions": recipe.prepInstructions
+                "recipeName": editedRecipe.recipeName,
+                "cuisineType": editedRecipe.cuisineType,
+                "estTimeOfPrep": editedRecipe.estTimeOfPrep,
+                "ingredients": editedRecipe.ingredients,
+                "prepInstructions": editedRecipe.prepInstructions
             })
         }
 
@@ -131,9 +131,9 @@ const IndividualRecipe = () => {
                 <Select
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
-                    value={recipe.cuisineType}
+                    value={!cuisineType ? recipe.cuisineType : cuisineType}
                     onChange={handleChange}
-                        >
+                >
                     <MenuItem value={'Italian'}>Italian</MenuItem>
                     <MenuItem value={'Japanese'}>Japanese</MenuItem>
                     <MenuItem value={'Chinese'}>Chinese</MenuItem>
@@ -156,7 +156,7 @@ const IndividualRecipe = () => {
             <div className="recipe-card">
                 <h1 style={{fontWeight: 900}}>{recipe.recipeName}</h1>
                 <h3>{recipe.cuisineType}</h3>
-                <h5>{recipe.estTimeOfPrep}</h5>
+                <h4>{recipe.estTimeOfPrep}</h4>
                 <p>{recipe.ingredients}</p>
                 <p>{recipe.prepInstructions}</p>
                 <div className="button-div">

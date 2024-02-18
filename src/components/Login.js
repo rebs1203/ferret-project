@@ -80,6 +80,7 @@ const Login = () => {
                 </div>
             </form>
                 <p>Don't have an account yet? <a href="/recipe-blog/register">Click here to register!</a></p>
+                <p>You don't need an account to find your favorite meal! <a href="/">Browse Recipes!</a></p>
                 </>
             }
         </>

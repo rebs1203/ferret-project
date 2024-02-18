@@ -1,4 +1,4 @@
-.login-div {
+.register-form {
     display: flex;
     flex-direction: column;
     width: 40%;
@@ -6,11 +6,7 @@
     margin-top: 5%;
 }
 
-p {
-    color: #003049;
-    text-align: center;
-}
-
-.button {
-    color: #fdf0d5;
+.recipe-name {
+    font-weight: 700 !important;
+    font-size: 1.7rem !important;
 }
