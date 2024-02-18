@@ -128,21 +128,21 @@ const IndividualRecipe = () => {
                 <label htmlFor="recipeName"></label>
                 <TextField id="recipeName" label="Recipe name" variant="filled" defaultValue={recipe.recipeName} onChange={(e) => setRecipeName(e.target.value)}/>
                 <FormControl fullWidth variant="filled">
-                <InputLabel id="demo-simple-select-filled-label">Filter by Cuisine</InputLabel>
                 <Select
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
                     value={cuisineType}
-                    label="Filter by Cuisine"
                     onChange={handleChange}
                     renderValue={(selected) => {
                         if (selected.length === 0) {
-                          return <em>Placeholder</em>;
+                            return <em>Placeholder</em>;
                         }
-            
-                        return selected.join(', ');
-                      }}
-                >
+                            return selected.join(', ');
+                        }}
+                        >
+                    <MenuItem disabled value="">
+                        <em>Placeholder</em>
+                    </MenuItem>
                     <MenuItem value={'Italian'}>Italian</MenuItem>
                     <MenuItem value={'Japanese'}>Japanese</MenuItem>
                     <MenuItem value={'Chinese'}>Chinese</MenuItem>
