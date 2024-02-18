@@ -26,7 +26,12 @@ const IndividualRecipe = () => {
     const navigate = useNavigate()
 
     const handleChange = (event) => {
-        setCuisineType(event.target.value);
+        const {
+            target: { value },
+        } = event;
+        setCuisineType(
+            typeof value === 'string' ? value.split(',') : value,
+        );
     };
 
     const handlePatch = (event) => {
@@ -140,9 +145,6 @@ const IndividualRecipe = () => {
                             return selected.join(', ');
                         }}
                         >
-                    <MenuItem disabled value="">
-                        <em>Placeholder</em>
-                    </MenuItem>
                     <MenuItem value={'Italian'}>Italian</MenuItem>
                     <MenuItem value={'Japanese'}>Japanese</MenuItem>
                     <MenuItem value={'Chinese'}>Chinese</MenuItem>
