@@ -26,12 +26,7 @@ const IndividualRecipe = () => {
     const navigate = useNavigate()
 
     const handleChange = (event) => {
-        const {
-            target: { value },
-        } = event;
-        setCuisineType(
-            typeof value === 'string' ? value.split(',') : value,
-        );
+        setCuisineType(event.target.value)
     };
 
     const handlePatch = (event) => {
@@ -136,14 +131,8 @@ const IndividualRecipe = () => {
                 <Select
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
-                    value={cuisineType}
+                    value={recipe.cuisineType}
                     onChange={handleChange}
-                    renderValue={(selected) => {
-                        if (selected.length === 0) {
-                            return <em>Placeholder</em>;
-                        }
-                            return selected.join(', ');
-                        }}
                         >
                     <MenuItem value={'Italian'}>Italian</MenuItem>
                     <MenuItem value={'Japanese'}>Japanese</MenuItem>
