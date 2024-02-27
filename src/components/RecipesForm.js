@@ -13,6 +13,7 @@ const RecipesForm = ({reloadList, setReloadList}) => {
     const [estTimeOfPrep, setEstTimeOfPrep] = useState('')
     const [ingredients, setIngredients] = useState('')
     const [prepInstructions, setPrepInstructions] = useState('')
+    const [errorMessage, setErrorMessage] = useState(null)
 
     const handleRecipesForm = (event) => {
         event.preventDefault()
@@ -34,6 +35,7 @@ const RecipesForm = ({reloadList, setReloadList}) => {
     
     const fetchCreateRecipe = async (recipe) => {
 
+        setErrorMessage(null);
         const token = localStorage.getItem('token')
         const userId = localStorage.getItem('user')
 
@@ -56,27 +58,27 @@ const RecipesForm = ({reloadList, setReloadList}) => {
         }
 
         try {
-            const response = await fetch(url, options)
+            const response = await fetch(url, options);
+            const data = await response.json();
 
-            if (!response.ok) {
-                alert(response.status)
-                throw new Error(`Error: ${response.status}`)
+            if (response.ok) {
+                setReloadList(reloadList + 1);
+            } else {
+                setErrorMessage(data.message);
             }
-
-            const data = await response.json()
-
-            console.log(data)
-
-            
-            setReloadList(reloadList + 1)
         } catch (error) {
-            console.log(error)
+            setErrorMessage("Request failed");
         }
     }
     
     
     return (
         <>
+            {errorMessage !== null && (
+                <div>
+                    <h3 style={{textAlign: 'center', color: '#F00' }}>{errorMessage}</h3>
+                </div>
+            )}
             <form onSubmit={handleRecipesForm}>
                 <div className="form-div">
                 <label htmlFor="recipeName"></label>

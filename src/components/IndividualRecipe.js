@@ -18,6 +18,7 @@ const IndividualRecipe = () => {
     const [edit, setEdit] = useState(false)
     const [id] = useState(localStorage.getItem('recipeId'))
     const [token] = useState(localStorage.getItem('token'))
+    const [errorMessage, setErrorMessage] = useState(null)
 
     useEffect(() => {
         fetchRecipe(id)
@@ -59,10 +60,13 @@ const IndividualRecipe = () => {
         try {
             const response = await fetch(url, options)
             const data = await response.json()
-
-            setRecipe(data.recipe)
+            if (response.ok) {
+                setRecipe(data.recipe)
+            } else {
+                setErrorMessage(data.message)
+            }
         } catch (error) {
-            console.log(error)
+            setErrorMessage("Request fail")
         }
     }
 
@@ -88,12 +92,15 @@ const IndividualRecipe = () => {
         try {
             const response = await fetch(url, options)
             const data = await response.json()
-
+            if(response.ok) {
             setRecipe(data.updatedRecipe)
             setEdit(false)
-        } catch (error) {
-            console.log(error)
-        }
+            } else {
+            setErrorMessage(data.message)
+            }
+            } catch (error) {
+            setErrorMessage("Request fail")
+            }
     }
 
     const fetchDelete = async (id) => {
@@ -108,20 +115,27 @@ const IndividualRecipe = () => {
 
         try {
             const response = await fetch(url, options)
+            const data = await response.json()
 
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`)
+            if (response.ok) {
+                navigate('/recipe-blog/mypage')
+            } else {
+                setErrorMessage(data.message)
             }
-
-            navigate('/recipe-blog/mypage')
         } catch (error) {
-            console.log(error)
+            setErrorMessage("Request fail")
         }
     }
 
     
     return (
-        <>  {
+        <> 
+        {errorMessage !== null && (
+            <div>
+                <h3 style={{textAlign: 'center', color: '#F00' }}>{errorMessage}</h3>
+            </div>
+        )}
+        {
             edit ?
             <form onSubmit={handlePatch}>
                 <div className="edit-form">

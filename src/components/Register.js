@@ -9,6 +9,7 @@ const Register = () => {
     const [username, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [errorMessage, setErrorMessage] = useState(null)
 
 
     const handleRegister = (event) => {
@@ -24,6 +25,8 @@ const Register = () => {
     }
 
     const fetchRegister = async (user) => {
+
+        setErrorMessage(null);
         const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/register`
 
         const options = {
@@ -42,22 +45,27 @@ const Register = () => {
             const response = await fetch(url, options)
 
             const data = await response.json()
-                
-            localStorage.setItem('token', data.token)
-            localStorage.setItem('user', data.user.id)
-
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`)
+            
+            if(response.ok) {
+                localStorage.setItem('token', data.token)
+                localStorage.setItem('user', data.user.id)
+                setCreatedUser(true)
+            } else {
+                setErrorMessage(data.message)
             }
-            setCreatedUser(true)
         } catch (error) {
-            console.log(error)
+            setErrorMessage("Request fail")
         }
     }
 
     
     return (
         <>
+            {errorMessage !== null && (
+                <div>
+                    <h3 style={{textAlign: 'center', color: '#F00' }}>{errorMessage}</h3>
+                </div>
+            )}
             { createdUser ?
             <div>
                 <h2 style={{textAlign: 'center'}}>User successfully created!</h2>
