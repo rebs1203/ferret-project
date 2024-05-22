@@ -27,3 +27,18 @@
     background-color: #84b1ce;
     color: #003049;
 }
+
+img {
+    width: 300px;
+}
+
+.paragraphs {
+    text-align: left;
+}
+
+@media screen and (max-width: 900px){
+    .recipe-card {
+        width: 80%;
+        margin-left: 8%;
+    }
+}

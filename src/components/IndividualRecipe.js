@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, Image, useRef } from "react"
 import { Button, TextField } from "@mui/material"
 import { useNavigate } from "react-router-dom"
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import '../styles/IndividualRecipe.css'
 
-const IndividualRecipe = () => {
+const IndividualRecipe = ({decodeBase64}) => {
     
     const [recipeName, setRecipeName] = useState('')
     const [cuisineType, setCuisineType] = useState('')
+    const [image, setImage] = useState(null)
     const [estTimeOfPrep, setEstTimeOfPrep] = useState('')
     const [ingredients, setIngredients] = useState('')
     const [prepInstructions, setPrepInstructions] = useState('')
@@ -19,6 +19,8 @@ const IndividualRecipe = () => {
     const [id] = useState(localStorage.getItem('recipeId'))
     const [token] = useState(localStorage.getItem('token'))
     const [errorMessage, setErrorMessage] = useState(null)
+    const imageRef = useRef(null)
+
 
     useEffect(() => {
         fetchRecipe(id)
@@ -32,36 +34,48 @@ const IndividualRecipe = () => {
 
     };
 
-    const handlePatch = (event) => {
+    const handlePatch = async (event) => {
         event.preventDefault()
-        const recipeObject = {
-            recipeName: recipeName || recipe.recipeName,
-            cuisineType: cuisineType || recipe.cuisineType,
-            estTimeOfPrep: estTimeOfPrep || recipe.estTimeOfPrep,
-            ingredients: ingredients || recipe.ingredients,
-            prepInstructions: prepInstructions || recipe.prepInstructions
-        }
-        fetchEdit(id, recipeObject)
+        const formData = new FormData();
+        formData.append('recipeName', recipeName || recipe.recipeName);
+        formData.append('cuisineType', cuisineType || recipe.cuisineType);
+        formData.append('estTimeOfPrep', estTimeOfPrep || recipe.estTimeOfPrep);
+        formData.append('ingredients', ingredients || recipe.ingredients);
+        formData.append('prepInstructions', prepInstructions || recipe.prepInstructions);
+        formData.append('image', image || recipe.image);
+        await fetchEdit(id, formData)
+    }
+
+    const handleLists = (list) => {
+        const listSplit = list.split('-')
+        listSplit.shift()
+        list = listSplit
     }
 
 
     const fetchRecipe = async (id) => {
 
-        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
+        const url = `http://localhost:3000/recipe-blog/mypage/${id}`//`https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
+
 
         const options = {
             method: 'GET',
             headers: {
                 Authorization:`Bearer ${token}`,
-                'Content-Type': 'application/json'
             }
         }
 
         try {
             const response = await fetch(url, options)
             const data = await response.json()
+
+            data.recipe.image.data.data = decodeBase64(data.recipe.image.data.data)
+
             if (response.ok) {
                 setRecipe(data.recipe)
+                const ingredientListSplit = data.recipe.ingredients.split('-')
+                ingredientListSplit.shift()
+                data.recipe.ingredients = ingredientListSplit
             } else {
                 setErrorMessage(data.message)
             }
@@ -72,28 +86,26 @@ const IndividualRecipe = () => {
 
     const fetchEdit = async (id, editedRecipe) => {
 
-        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
+        const url = `http://localhost:3000/recipe-blog/mypage/${id}`//`https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
 
         const options = {
             method: 'PATCH',
             headers: {
                 Authorization:`Bearer ${token}`,
-                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                "recipeName": editedRecipe.recipeName,
-                "cuisineType": editedRecipe.cuisineType,
-                "estTimeOfPrep": editedRecipe.estTimeOfPrep,
-                "ingredients": editedRecipe.ingredients,
-                "prepInstructions": editedRecipe.prepInstructions
-            })
+            body: editedRecipe
         }
 
         try {
             const response = await fetch(url, options)
             const data = await response.json()
+
+            data.updatedRecipe.image.data.data = decodeBase64(data.updatedRecipe.image.data.data)
             if(response.ok) {
             setRecipe(data.updatedRecipe)
+            const ingredientListSplit = data.updatedRecipe.ingredients.split('-')
+            ingredientListSplit.shift()
+            data.updatedRecipe.ingredients = ingredientListSplit
             setEdit(false)
             } else {
             setErrorMessage(data.message)
@@ -104,7 +116,7 @@ const IndividualRecipe = () => {
     }
 
     const fetchDelete = async (id) => {
-        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
+        const url = `http://localhost:3000/recipe-blog/mypage/${id}`//`https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
 
         const options = {
             method: 'DELETE',
@@ -139,7 +151,6 @@ const IndividualRecipe = () => {
             edit ?
             <form onSubmit={handlePatch}>
                 <div className="edit-form">
-                <label htmlFor="recipeName"></label>
                 <TextField id="recipeName" label="Recipe name" variant="filled" defaultValue={recipe.recipeName} onChange={(e) => setRecipeName(e.target.value)}/>
                 <FormControl fullWidth variant="filled">
                 <Select
@@ -156,12 +167,10 @@ const IndividualRecipe = () => {
                     <MenuItem value={'Other'}>Other</MenuItem>
                 </Select>
                 </FormControl>
-                <label htmlFor="estTimeOfPrep"></label>
+                <TextField id="image" label="" variant="filled" type="file" name="image" ref={imageRef} onChange={(e) => setImage(e.target.files[0])}/>
                 <TextField id="estTimeOfPrep" label="Estimate time of prep" variant="filled" defaultValue={recipe.estTimeOfPrep} onChange={(e) => setEstTimeOfPrep(e.target.value)}/>
-                <label htmlFor="ingredients"></label>
-                <TextField id="ingredients" label="Ingredients" variant="filled" defaultValue={recipe.ingredients} onChange={(e) => setIngredients(e.target.value)}/>
-                <label htmlFor="prepInstructions"></label>
-                <TextField id="prepInstructions" label="Prep instructions" variant="filled" defaultValue={recipe.prepInstructions} onChange={(e) => setPrepInstructions(e.target.value)}/>
+                <TextField id="ingredients" label="Ingredients" multiline rows={4} variant="filled" defaultValue={recipe.ingredients} onChange={(e) => setIngredients(e.target.value)}/>
+                <TextField id="prepInstructions" label="Prep instructions" multiline rows={4} variant="filled" defaultValue={recipe.prepInstructions} onChange={(e) => setPrepInstructions(e.target.value)}/>
                 <Button variant="contained" type="submit">Finish Editing</Button>
                 <a href="/recipe-blog/mypage" style={{marginTop: '1%'}}>Go back</a>
             </div>
@@ -169,10 +178,17 @@ const IndividualRecipe = () => {
             :
             <div className="recipe-card">
                 <h1 style={{fontWeight: 900}}>{recipe.recipeName}</h1>
-                <h3>{recipe.cuisineType}</h3>
+                <h3 style={{margin: '0%'}}>{recipe.cuisineType}</h3>
                 <h4>{recipe.estTimeOfPrep}</h4>
-                <p>{recipe.ingredients}</p>
-                <p>{recipe.prepInstructions}</p>
+                <img src={recipe?.image?.data?.data}/>
+                <ul>
+                    {recipe?.ingredients?.map((ingredient) => {
+                        return (
+                            <li>{ingredient}</li>
+                        )
+                    })}
+                </ul>
+                <p className="paragraphs">{recipe.prepInstructions}</p>
                 <div className="button-div">
                 <Button variant="contained" type="submit" id='button' onClick={() => setEdit(true)}>Edit</Button>
                 <Button variant="contained" type="submit" id='button' onClick={() => fetchDelete(id)}>Delete</Button>

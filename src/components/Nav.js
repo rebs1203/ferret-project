@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -20,31 +19,6 @@ const Nav = () => {
         localStorage.clear()
         navigate('/recipe-blog/logon')
     }
-
-    // const fetchLogoff = async () => {
-    //     const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/logoff`
-
-    //     const options = {
-    //         method: 'POST',
-    //         headers: {
-    //             Authorization:`Bearer ${token}`,
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }
-
-    //     try {
-    //         const response = await fetch(url, options)
-
-    //         if (!response.ok) {
-    //             throw new Error(`Error: ${response.status}`)
-    //         }
-
-    //         setGrantAccess(0)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
-    
 
     return (
         <>

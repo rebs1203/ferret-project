@@ -14,3 +14,10 @@ p {
 .button {
     color: #fdf0d5;
 }
+
+@media screen and (max-width: 900px){
+    .login-div {
+        width: 80%;
+        margin-left: 10%;
+    }
+}

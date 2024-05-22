@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { TextField, Button } from "@mui/material"
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,23 +10,38 @@ const RecipesForm = ({reloadList, setReloadList}) => {
     
     const [recipeName, setRecipeName] = useState('')
     const [cuisineType, setCuisineType] = useState('')
+    const [image, setImage] = useState(null)
     const [estTimeOfPrep, setEstTimeOfPrep] = useState('')
     const [ingredients, setIngredients] = useState('')
     const [prepInstructions, setPrepInstructions] = useState('')
     const [errorMessage, setErrorMessage] = useState(null)
+    const userId = localStorage.getItem('user')
 
-    const handleRecipesForm = (event) => {
+    const imageRef = useRef(null)
+    const formRef = useRef(null)
+
+    const handleRecipesForm = async (event) => {
         event.preventDefault()
-        if (recipeName && cuisineType && estTimeOfPrep && ingredients && prepInstructions) {
-            const recipeObject = {
-                recipeName,
-                cuisineType,
-                estTimeOfPrep,
-                ingredients,
-                prepInstructions
-            }
-            fetchCreateRecipe(recipeObject)
+        if (recipeName && cuisineType && image && estTimeOfPrep && ingredients && prepInstructions) {
+            const formData = new FormData();
+            formData.append('recipeName', recipeName);
+            formData.append('createdBy', userId)
+            formData.append('cuisineType', cuisineType);
+            formData.append('image', image);
+            formData.append('estTimeOfPrep', estTimeOfPrep);
+            formData.append('ingredients', ingredients);
+            formData.append('prepInstructions', prepInstructions);
+            await fetchCreateRecipe(formData);
+            formRef.current.reset()
+            setImage(null)
+        } else {
+            alert('Please fill out all inputs.')
         }
+        setCuisineType("")
+        setEstTimeOfPrep("")
+        setIngredients("")
+        setPrepInstructions("")
+        setRecipeName("")
     }
 
     const handleChange = (event) => {
@@ -37,24 +52,15 @@ const RecipesForm = ({reloadList, setReloadList}) => {
 
         setErrorMessage(null);
         const token = localStorage.getItem('token')
-        const userId = localStorage.getItem('user')
 
-        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage`
+        const url = `http://localhost:3000/recipe-blog/mypage`//`https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage`
 
         const options = {
             method: 'POST',
             headers: {
                 Authorization:`Bearer ${token}`,
-                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                "recipeName": recipe.recipeName,
-                "createdBy": userId,
-                "cuisineType": recipe.cuisineType,
-                "estTimeOfPrep": recipe.estTimeOfPrep,
-                "ingredients": recipe.ingredients,
-                "prepInstructions": recipe.prepInstructions
-            })
+            body: recipe
         }
 
         try {
@@ -79,10 +85,9 @@ const RecipesForm = ({reloadList, setReloadList}) => {
                     <h3 style={{textAlign: 'center', color: '#F00' }}>{errorMessage}</h3>
                 </div>
             )}
-            <form onSubmit={handleRecipesForm}>
+            <form ref={formRef} onSubmit={handleRecipesForm}>
                 <div className="form-div">
-                <label htmlFor="recipeName"></label>
-                <TextField id="recipeName" label="Recipe name" variant="filled" onChange={(e) => setRecipeName(e.target.value)}/>
+                <TextField id="recipeName" label="Recipe name" variant="filled" value={recipeName} onChange={(e) => setRecipeName(e.target.value)}/>
                 <FormControl variant="filled">
                 <InputLabel id="demo-simple-select-filled-label">Filter by Cuisine</InputLabel>
                 <Select
@@ -100,13 +105,11 @@ const RecipesForm = ({reloadList, setReloadList}) => {
                     <MenuItem value={'Other'}>Other</MenuItem>
                 </Select>
                 </FormControl>
-                <label htmlFor="estTimeOfPrep"></label>
-                <TextField id="estTimeOfPrep" label="Estimate time of prep" variant="filled" onChange={(e) => setEstTimeOfPrep(e.target.value)}/>
-                <label htmlFor="ingredients"></label>
-                <TextField id="ingredients" label="Ingredients" variant="filled" onChange={(e) => setIngredients(e.target.value)}/>
-                <label htmlFor="prepInstructions"></label>
-                <TextField id="prepInstructions" label="Prep instructions" variant="filled" onChange={(e) => setPrepInstructions(e.target.value)}/>
-                <Button variant="contained" type="submit">Add Recipe</Button>
+                <TextField id="image" label="" variant="filled" type="file" name="image" ref={imageRef} onChange={(e) => setImage(e.target.files[0])}/>
+                <TextField id="estTimeOfPrep" label="Estimate time of prep" variant="filled" value={estTimeOfPrep} onChange={(e) => setEstTimeOfPrep(e.target.value)}/>
+                <TextField id="ingredients" label="Ingredients" multiline rows={4} variant="filled" value={ingredients} onChange={(e) => setIngredients(e.target.value)}/>
+                <TextField id="prepInstructions" label="Prep instructions" multiline rows={4} variant="filled" value={prepInstructions} onChange={(e) => setPrepInstructions(e.target.value)}/>
+                <Button variant="contained" type="submit" id="button">Add Recipe</Button>
                 </div>
             </form>
         </>

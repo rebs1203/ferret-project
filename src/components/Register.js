@@ -27,7 +27,7 @@ const Register = () => {
     const fetchRegister = async (user) => {
 
         setErrorMessage(null);
-        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/register`
+        const url = `http://localhost:3000/recipe-blog/register`//`https://recipe-blog-l7ey.onrender.com/recipe-blog/register`
 
         const options = {
             method: 'POST',

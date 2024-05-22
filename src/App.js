@@ -12,7 +12,24 @@ import Nav from './components/Nav.js';
 function App() {
 
   const [reloadList, setReloadList] = useState(0) 
-  const [grantAccess, setGrantAccess] = useState(0)
+
+  const decodeBase64 = (buffer) => {
+    let typpedArray = new Uint8Array(buffer);
+    const stringChar = typpedArray.reduce((data, byte)=> {
+        return data + String.fromCharCode(byte);
+        }, '')
+    let base64String = window.btoa(stringChar)
+    const decodedString = decodeURIComponent(
+        atob(base64String)
+        .split("")
+        .map((c) => {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    )
+    const imageUrl = `data:image/jpg;base64,${decodedString}`
+    return imageUrl
+}
 
   return (
     <>
@@ -21,7 +38,7 @@ function App() {
           <Route path='/' element={
             <>
               <Nav />
-              <RecipesPage />
+              <RecipesPage decodeBase64={decodeBase64}/>
             </>
           }>
           </Route>
@@ -43,13 +60,13 @@ function App() {
             <>
               <Nav />
               <RecipesForm reloadList={reloadList} setReloadList={setReloadList} />
-              <UsersPage reloadList={reloadList} setReloadList={setReloadList} />
+              <UsersPage reloadList={reloadList} setReloadList={setReloadList} decodeBase64={decodeBase64} />
             </>
           }>
           </Route>
           <Route path='/recipe-blog/mypage/:id' element={
             <>
-              <IndividualRecipe />
+              <IndividualRecipe decodeBase64={decodeBase64}/>
             </>
           }>
           </Route>

@@ -23,7 +23,7 @@ const Login = () => {
     }
 
     const fetchUser = async (compareUser) => {
-        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/logon`
+        const url = `http://localhost:3000/recipe-blog/logon`//`https://recipe-blog-l7ey.onrender.com/recipe-blog/logon`
 
         const options = {
             method: 'POST',
@@ -40,13 +40,10 @@ const Login = () => {
             const response = await fetch(url, options)
 
             const data = await response.json()
-
-            console.log(data.message)
             
             
             if (response.ok) {
                 localStorage.setItem('token', data.token)
-                console.log(data.user.id)
                 localStorage.setItem('user', data.user.id)
                 setToken(data.token)
             } else {
@@ -57,8 +54,6 @@ const Login = () => {
             console.log(error)
         }
     }
-
-    console.log(token)
 
 
     return (
