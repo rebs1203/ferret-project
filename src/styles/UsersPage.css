@@ -1,0 +1,19 @@
+.card-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2%;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
+    color: #004266 !important;
+}

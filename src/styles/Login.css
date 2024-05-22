@@ -1,0 +1,23 @@
+.login-div {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 5%;
+}
+
+p {
+    color: #003049;
+    text-align: center;
+}
+
+.button {
+    color: #fdf0d5;
+}
+
+@media screen and (max-width: 900px){
+    .login-div {
+        width: 80%;
+        margin-left: 10%;
+    }
+}
