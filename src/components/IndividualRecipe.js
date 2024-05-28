@@ -55,7 +55,7 @@ const IndividualRecipe = ({decodeBase64}) => {
 
     const fetchRecipe = async (id) => {
 
-        const url = `https://recipe-blog-react.onrender.com/recipe-blog/mypage/${id}`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
 
 
         const options = {
@@ -86,7 +86,7 @@ const IndividualRecipe = ({decodeBase64}) => {
 
     const fetchEdit = async (id, editedRecipe) => {
 
-        const url = `https://recipe-blog-react.onrender.com/recipe-blog/mypage/${id}`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
 
         const options = {
             method: 'PATCH',
@@ -116,7 +116,7 @@ const IndividualRecipe = ({decodeBase64}) => {
     }
 
     const fetchDelete = async (id) => {
-        const url = `https://recipe-blog-react.onrender.com/recipe-blog/mypage/${id}`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage/${id}`
 
         const options = {
             method: 'DELETE',
