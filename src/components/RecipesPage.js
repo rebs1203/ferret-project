@@ -35,7 +35,7 @@ const RecipesPage = ({decodeBase64}) => {
 
         const queryParams = new URLSearchParams(cuisine);
         const url = `https://recipe-blog-react.onrender.com/recipe-blog?name=${queryParams?.toString()}`
-        const urlAll = `https://recipe-blog-react.onrender.com/recipe-blog`
+        const urlAll = `https://recipe-blog-react.onrender.com/`
 
         const options = {
             method: 'POST',
