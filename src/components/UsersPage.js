@@ -36,7 +36,7 @@ const UsersPage = ({reloadList, decodeBase64}) => {
         const token = localStorage.getItem('token')
         const id = localStorage.getItem('user')
 
-        const url = `http://localhost:3000/recipe-blog/mypage`//`https://recipe-blog-l7ey.onrender.com/recipe-blog/mypage`
+        const url = `https://recipe-blog-react.onrender.com/recipe-blog/mypage`
 
         const options = {
             method: 'PATCH',
