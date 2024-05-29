@@ -34,13 +34,16 @@ const RecipesPage = ({decodeBase64}) => {
     const fetchAllRecipes = async () => {
 
         const queryParams = new URLSearchParams(cuisine);
-        const url = `https://recipe-blog-react.onrender.com/recipe-blog?name=${queryParams?.toString()}`
-        const urlAll = `https://recipe-blog-react.onrender.com/recipe-blog`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog?name=${queryParams?.toString()}`
+        const urlAll = `https://recipe-blog-l7ey.onrender.com/recipe-blog`
 
         const options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH"
             },
             body: JSON.stringify({'test': 'GETALL'})
         }

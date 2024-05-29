@@ -23,7 +23,7 @@ const Login = () => {
     }
 
     const fetchUser = async (compareUser) => {
-        const url = `https://recipe-blog-react.onrender.com/recipe-blog/logon`
+        const url = `https://recipe-blog-l7ey.onrender.com/recipe-blog/logon`
 
         const options = {
             method: 'POST',
