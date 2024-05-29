@@ -59,9 +59,7 @@ const RecipesForm = ({reloadList, setReloadList}) => {
             method: 'POST',
             headers: {
                 Authorization:`Bearer ${token}`,
-                "Access-Control-Allow-Headers" : "Content-Type",
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH"
             },
             body: recipe
         }

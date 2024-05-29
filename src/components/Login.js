@@ -28,10 +28,8 @@ const Login = () => {
         const options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-                "Access-Control-Allow-Headers" : "Content-Type",
+                'Content-Type': 'application/json',
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH"
             },
             body: JSON.stringify({
                 'email': compareUser.email,
