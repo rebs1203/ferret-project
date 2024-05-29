@@ -62,6 +62,9 @@ const IndividualRecipe = ({decodeBase64}) => {
             method: 'GET',
             headers: {
                 Authorization:`Bearer ${token}`,
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH"
             }
         }
 
@@ -92,6 +95,9 @@ const IndividualRecipe = ({decodeBase64}) => {
             method: 'PATCH',
             headers: {
                 Authorization:`Bearer ${token}`,
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH"
             },
             body: editedRecipe
         }
@@ -122,6 +128,9 @@ const IndividualRecipe = ({decodeBase64}) => {
             method: 'DELETE',
             headers: {
                 Authorization:`Bearer ${token}`,
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH,DELETE"
             }
         }
 

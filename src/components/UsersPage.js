@@ -42,7 +42,10 @@ const UsersPage = ({reloadList, decodeBase64}) => {
             method: 'PATCH',
             headers: {
                 Authorization:`Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH"
             },
             body: JSON.stringify({
                 "userId": id
